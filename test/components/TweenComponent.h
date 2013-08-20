@@ -9,15 +9,14 @@ using namespace NGPP::Core;
 using namespace NGPP::Components;
 using namespace ::testing;
 
-TEST(TweenComponent, OutputX) {
-    Entity entity = Entity(0);
-
+TEST(TweenComponent, OutputX)
+{
     Time time = {0, 0, 16, 0.0f};
 
     MockInput<Vector3> mockInput;
     MockOutput<Vector3> mockOutput;
 
-    TweenComponent tweenComp = TweenComponent(&entity, 100, &mockInput, &mockOutput);
+    TweenComponent tweenComp = TweenComponent(100, &mockInput, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(
@@ -34,15 +33,14 @@ TEST(TweenComponent, OutputX) {
     ASSERT_EQ(tweenComp.value.x, 16.0f);
 }
 
-TEST(TweenComponent, OutputY) {
-    Entity entity = Entity(0);
-
+TEST(TweenComponent, OutputY)
+{
     Time time = {0, 0, 16, 0.0f};
 
     MockInput<Vector3> mockInput;
     MockOutput<Vector3> mockOutput;
 
-    TweenComponent tweenComp = TweenComponent(&entity, 100, &mockInput, &mockOutput);
+    TweenComponent tweenComp = TweenComponent(100, &mockInput, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(
@@ -59,15 +57,14 @@ TEST(TweenComponent, OutputY) {
     ASSERT_EQ(tweenComp.value.y, 32.0f);
 }
 
-TEST(TweenComponent, OutputZ) {
-    Entity entity = Entity(0);
-
+TEST(TweenComponent, OutputZ)
+{
     Time time = {0, 0, 16, 0.0f};
 
     MockInput<Vector3> mockInput;
     MockOutput<Vector3> mockOutput;
 
-    TweenComponent tweenComp = TweenComponent(&entity, 100, &mockInput, &mockOutput);
+    TweenComponent tweenComp = TweenComponent(100, &mockInput, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(
@@ -84,15 +81,14 @@ TEST(TweenComponent, OutputZ) {
     ASSERT_EQ(tweenComp.value.z, 48.0f);
 }
 
-TEST(TweenComponent, OutputAll) {
-    Entity entity = Entity(0);
-
+TEST(TweenComponent, OutputAll)
+{
     Time time = {0, 0, 16, 0.0f};
 
     MockInput<Vector3> mockInput;
     MockOutput<Vector3> mockOutput;
 
-    TweenComponent tweenComp = TweenComponent(&entity, 100, &mockInput, &mockOutput);
+    TweenComponent tweenComp = TweenComponent(100, &mockInput, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(

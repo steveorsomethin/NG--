@@ -8,7 +8,8 @@ using namespace NGPP::Core;
 using namespace NGPP::Components;
 using namespace ::testing;
 
-TEST(ScaleComponent, OutputAll) {
+TEST(ScaleComponent, OutputAll)
+{
     Input<Vector3> input;
     MockOutput<Vector3> mockOutput;
 

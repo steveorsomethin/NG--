@@ -8,13 +8,12 @@ using namespace NGPP::Core;
 using namespace NGPP::Components;
 using namespace ::testing;
 
-TEST(PositionComponent, OutputX) {
-    Entity entity = Entity(0);
-
+TEST(PositionComponent, OutputX)
+{
     MockInput<Vector3> mockInput;
     MockOutput<Vector3> mockOutput;
 
-    PositionComponent posComp = PositionComponent(&entity, &mockInput, &mockOutput);
+    PositionComponent posComp = PositionComponent(&mockInput, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(
@@ -29,13 +28,12 @@ TEST(PositionComponent, OutputX) {
     ASSERT_EQ(posComp.position.x, 200.0f);
 }
 
-TEST(PositionComponent, OutputY) {
-    Entity entity = Entity(0);
-
+TEST(PositionComponent, OutputY)
+{
     MockInput<Vector3> mockInput;
     MockOutput<Vector3> mockOutput;
 
-    PositionComponent posComp = PositionComponent(&entity, &mockInput, &mockOutput);
+    PositionComponent posComp = PositionComponent(&mockInput, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(
@@ -50,13 +48,12 @@ TEST(PositionComponent, OutputY) {
     ASSERT_EQ(posComp.position.y, 200.0f);
 }
 
-TEST(PositionComponent, OutputZ) {
-    Entity entity = Entity(0);
-
+TEST(PositionComponent, OutputZ)
+{
     MockInput<Vector3> mockInput;
     MockOutput<Vector3> mockOutput;
 
-    PositionComponent posComp = PositionComponent(&entity, &mockInput, &mockOutput);
+    PositionComponent posComp = PositionComponent(&mockInput, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(
@@ -71,13 +68,12 @@ TEST(PositionComponent, OutputZ) {
     ASSERT_EQ(posComp.position.z, 200.0f);
 }
 
-TEST(PositionComponent, OutputAll) {
-    Entity entity = Entity(0);
-
+TEST(PositionComponent, OutputAll)
+{
     MockInput<Vector3> mockInput;
     MockOutput<Vector3> mockOutput;
 
-    PositionComponent posComp = PositionComponent(&entity, &mockInput, &mockOutput);
+    PositionComponent posComp = PositionComponent(&mockInput, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(
@@ -94,13 +90,12 @@ TEST(PositionComponent, OutputAll) {
     ASSERT_EQ(posComp.position.z, 600.0f);
 }
 
-TEST(PositionComponent, InputOutput) {
-    Entity entity = Entity(0);
-
+TEST(PositionComponent, InputOutput)
+{
     Input<Vector3> input;
     MockOutput<Vector3> mockOutput;
 
-    PositionComponent posComp = PositionComponent(&entity, &input, &mockOutput);
+    PositionComponent posComp = PositionComponent(&input, &mockOutput);
 
     EXPECT_CALL(mockOutput,
         Send(
