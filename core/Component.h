@@ -7,8 +7,6 @@ namespace NGPP {
 
         class Component {
         public:
-            Component(Entity *entity) : entity(entity) {}
-
             Entity *entity;
         };
     }
