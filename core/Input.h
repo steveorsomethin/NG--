@@ -3,10 +3,10 @@
 
 #include <functional>
 
-using namespace std;
-
 namespace NGPP {
     namespace Core {
+        using namespace std;
+
         template<class T>
         class IInput {
         public:
@@ -18,11 +18,13 @@ namespace NGPP {
         template<class T>
         class Input : public IInput<T> {
         public:
-            void Receive(T data) {
+            void Receive(T data)
+            {
                 this->onReceive(data);
             }
 
-            void OnReceive(function<void(T)> onReceive) {
+            void OnReceive(function<void(T)> onReceive)
+            {
                 this->onReceive = onReceive;
             }
         private:

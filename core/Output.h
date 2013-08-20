@@ -3,10 +3,10 @@
 
 #include <list>
 
-using namespace std;
-
 namespace NGPP {
     namespace Core {
+        using namespace std;
+
         template<class T>
         class IInput;
 
@@ -20,17 +20,22 @@ namespace NGPP {
         template<class T>
         class Output : public IOutput<T> {
         public:
-            void Send(T data) {
+            void Send(T data)
+            {
+                this->lastValue = data;
                 for (auto subscriber : this->subscribers) {
                     subscriber->Receive(data);
                 }
             }
 
-            void Pipe(IInput<T> *subscriber) {
+            void Pipe(IInput<T> *subscriber)
+            {
                 this->subscribers.push_back(subscriber);
+                subscriber->Receive(this->lastValue);
             }
         private:
             list<IInput<T>*> subscribers;
+            T lastValue;
         };
     }
 }
