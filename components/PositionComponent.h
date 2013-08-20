@@ -16,48 +16,67 @@ namespace NGPP {
 
         class PositionComponent : public Component {
         public:
-            PositionComponent(Entity *entity, IInput<Vector3> *input, IOutput<Vector3> *output) :
-                Component(entity),
+            PositionComponent(IInput<Vector3> *input, IOutput<Vector3> *output) :
+                Component(),
                 input(input),
                 output(output)
             {
-                input->OnReceive(bind(&PositionComponent::SetPosition, this, _1));
+                input->OnReceive(
+                    bind(
+                        (void(PositionComponent::*)(Vector3))&PositionComponent::SetPosition,
+                        this,
+                        _1
+                    )
+                );
             }
 
-            PositionComponent(Entity *entity) :
-                PositionComponent(entity, new Input<Vector3>(), new Output<Vector3>())
+            PositionComponent() :
+                PositionComponent(new Input<Vector3>(), new Output<Vector3>())
             {
             }
 
-            void SetPosition(Vector3 value) {
+            void SetPosition(Vector3 value)
+            {
                 this->position = value;
                 this->output->Send(value);
             }
 
-            void SetX(float value) {
+            void SetPosition(float x, float y, float z)
+            {
+                this->position = Vector3(x, y, z);
+                this->output->Send(this->position);
+            }
+
+            void SetX(float value)
+            {
                 this->position.x = value;
                 this->output->Send(this->position);
             }
 
-            void SetY(float value) {
+            void SetY(float value)
+            {
                 this->position.y = value;
                 this->output->Send(this->position);
             }
 
-            void SetZ(float value) {
+            void SetZ(float value)
+            {
                 this->position.z = value;
                 this->output->Send(this->position);
             }
 
-            float GetX() {
+            float GetX()
+            {
                 return this->position.x;
             }
 
-            float GetY() {
+            float GetY()
+            {
                 return this->position.y;
             }
 
-            float GetZ() {
+            float GetZ()
+            {
                 return this->position.z;
             }
 

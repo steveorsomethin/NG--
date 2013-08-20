@@ -32,8 +32,9 @@ namespace NGPP {
         template<class T>
         class TweenManager {
         public:
-            void Integrate(Time time) {
+            bool Integrate(Time time) {
                 int elapsedTime = time.elapsedTime;
+                bool changed = false;
 
                 for (auto tween : this->tweens) {
                     T *property = tween->property;
@@ -53,7 +54,11 @@ namespace NGPP {
                         this->tweens.remove(tween);
                         //delete tween;
                     }
+
+                    changed = true;
                 }
+
+                return changed;
             }
 
             void Tween(T *property, T value, float duration) {
@@ -66,8 +71,8 @@ namespace NGPP {
 
         class TweenComponent : public Component, public ITick {
         public:
-            TweenComponent(Entity *entity, float duration, IInput<Vector3> *input, IOutput<Vector3> *output) :
-                Component(entity),
+            TweenComponent(float duration, IInput<Vector3> *input, IOutput<Vector3> *output) :
+                Component(),
                 duration(duration),
                 input(input),
                 output(output)
@@ -75,20 +80,23 @@ namespace NGPP {
                 this->input->OnReceive(bind(&TweenComponent::Tween, this, _1));
             }
 
-            TweenComponent(Entity *entity, float duration) :
-                TweenComponent(entity, duration, new Input<Vector3>(), new Output<Vector3>())
+            TweenComponent(float duration) :
+                TweenComponent(duration, new Input<Vector3>(), new Output<Vector3>())
             {
             }
 
-            void Tween(Vector3 value) {
+            void Tween(Vector3 value)
+            {
                 this->tweenManager.Tween(&(this->value.x), value.x, this->duration);
                 this->tweenManager.Tween(&(this->value.y), value.y, this->duration);
                 this->tweenManager.Tween(&(this->value.z), value.z, this->duration);
             }
 
-            void Tick(Time time) {
-                this->tweenManager.Integrate(time);
-                this->output->Send(this->value);
+            void Tick(Time time)
+            {
+                if (this->tweenManager.Integrate(time)) {
+                    this->output->Send(this->value);
+                }
             }
 
             IInput<Vector3> *input;

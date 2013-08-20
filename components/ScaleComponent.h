@@ -18,7 +18,8 @@ namespace NGPP {
                 Transformer(input, output),
                 scaleFactor(scaleFactor) {}
 
-            void Transform(Vector3 value) {
+            void Transform(Vector3 value)
+            {
                 value.x *= this->scaleFactor;
                 value.y *= this->scaleFactor;
                 value.z *= this->scaleFactor;
