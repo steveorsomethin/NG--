@@ -64,11 +64,12 @@
                 'deps/gtest/gmock.gyp:gmock'
             ],
             'include_dirs': [
-                '.'
+                '.',
+                'deps/glm/include'
             ],
             'sources': [
                 'test/tests.cc',
-                'common.gypi',
+                'common.gypi'
             ]
         }
     ]
